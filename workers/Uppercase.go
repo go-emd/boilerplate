@@ -3,7 +3,6 @@ package workers
 import (
 	"emd/log"
 	"emd/worker"
-	"encoding/gob"
 	"strings"
 )
 
@@ -16,8 +15,6 @@ func (w Uppercase) Init() {
 		p.Open()
 	}
 
-	gob.Register(new(Tuple))
-
 	log.INFO.Println("Worker " + w.Name + " inited.")
 }
 
@@ -28,7 +25,6 @@ func (w Uppercase) Run() {
 	defer func() {
 		if r := recover(); r != nil {
 			log.ERROR.Println("Uncaught error occurred, notifying leader and exiting.")
-			w.Ports()["MGMT_Uppercase"].Channel() <- "Exited"
 
 			w.Stop()
 		}

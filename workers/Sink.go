@@ -1,10 +1,8 @@
 package workers
 
 import (
-	"emd/connector"
 	"emd/log"
 	"emd/worker"
-	"encoding/gob"
 )
 
 type Sink struct {
@@ -16,10 +14,6 @@ func (w Sink) Init() {
 		p.Open()
 	}
 
-	// Set the ExternalIngress type
-	gob.Register(new(Tuple))
-	w.Ports()["Sink_and_Uppercase"].(*connector.ExternalUDPIngress).Buf = new(Tuple)
-
 	log.INFO.Println("Worker " + w.Name + " inited.")
 }
 
@@ -30,7 +24,6 @@ func (w Sink) Run() {
 	defer func() {
 		if r := recover(); r != nil {
 			log.ERROR.Println("Uncaught error occurred, notifying leader and exiting.")
-			w.Ports()["MGMT_Uppercase"].Channel() <- "Exited"
 
 			w.Stop()
 		}

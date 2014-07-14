@@ -24,7 +24,6 @@ func (w Source) Run() {
 	defer func() {
 		if r := recover(); r != nil {
 			log.ERROR.Println("Uncaught error occurred, notifying leader and exiting.")
-			w.Ports()["MGMT_Uppercase"].Channel() <- "Exited"
 
 			w.Stop()
 		}

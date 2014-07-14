@@ -26,29 +26,24 @@
 							"Buffer": "0"
 						},
 						{
-							"Type": "ExternalEgress",
-							"Worker": "127.0.0.1",
+							"Type": "LocalEgress",
+							"Worker": "Sink",
 							"Alias": "Sink_and_Uppercase",
 							"Buffer": "0"
 						}
 					]
-				}
-			]
-		},
-		{
-			"Hostname": "127.0.0.1",
-			"Workers": [
+				},
 				{
-					"Name": "Sink",
-					"Connections": [
-						{
-							"Type": "ExternalIngress",
-							"Worker": "localhost",
-							"Alias": "Sink_and_Uppercase",
-							"Buffer": "100"
-						}
-					]
-				}
+                    "Name": "Sink",
+                    "Connections": [
+                        {
+                            "Type": "LocalIngress",
+                            "Worker": "Uppercase",
+                            "Alias": "Sink_and_Uppercase",
+                            "Buffer": "100"
+                        }
+                    ]
+                 }
 			]
 		}
 	]
