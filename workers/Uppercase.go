@@ -15,7 +15,7 @@ func (w Uppercase) Init() {
 		p.Open()
 	}
 
-	log.INFO.Println("Worker " + w.Name + " inited.")
+	log.INFO.Println("Worker " + w.Name() + " inited.")
 }
 
 func (w Uppercase) Run() {
@@ -52,5 +52,5 @@ func (w Uppercase) Stop() {
 	w.Ports()["Source_and_Uppercase"].Close()
 	w.Ports()["Sink_and_Uppercase"].Close()
 
-	log.INFO.Println("Worker " + w.Name + " stopped.")
+	log.INFO.Println("Worker " + w.Name() + " stopped.")
 }

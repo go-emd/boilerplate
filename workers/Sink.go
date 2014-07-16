@@ -14,7 +14,7 @@ func (w Sink) Init() {
 		p.Open()
 	}
 
-	log.INFO.Println("Worker " + w.Name + " inited.")
+	log.INFO.Println("Worker " + w.Name() + " inited.")
 }
 
 func (w Sink) Run() {
@@ -50,5 +50,5 @@ func (w Sink) Stop() {
 	w.Ports()["MGMT_Sink"].Close()
 	w.Ports()["Sink_and_Uppercase"].Close()
 
-	log.INFO.Println("Worker " + w.Name + " stopped.")
+	log.INFO.Println("Worker " + w.Name() + " stopped.")
 }
